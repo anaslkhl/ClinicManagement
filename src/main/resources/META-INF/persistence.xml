@@ -11,16 +11,33 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+        <class>clinicmanagement.model.User</class>
+        <class>clinicmanagement.model.Doctor</class>
+        <class>clinicmanagement.model.Patient</class>
+        <class>clinicmanagement.model.Department</class>
+        <class>clinicmanagement.model.Specialty</class>
+        <class>clinicmanagement.model.Appointment</class>
+        <class>clinicmanagement.model.Availability</class>
+        <class>clinicmanagement.model.MedicalNote</class>
+
         <properties>
 
             <property name="jakarta.persistence.jdbc.url"
-                      value="jdbc:postgresql://localhost:5432/clinic_management"/>
+                      value="jdbc:postgresql://localhost:5434/clinic_manager"/>
+
+
 
             <property name="jakarta.persistence.jdbc.user"
                       value="clinic_user"/>
 
             <property name="jakarta.persistence.jdbc.password"
                       value="clinic"/>
+
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.PostgreSQLDialect"/>
+
+            <property name="hibernate.hbm2ddl.auto"
+                      value="update"/>
 
             <property name="hibernate.show_sql"
                       value="true"/>
