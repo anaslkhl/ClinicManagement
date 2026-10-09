@@ -1,0 +1,12 @@
+<body class="min-h-screen bg-ink-50 text-ink-900">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="min-h-screen lg:flex">
+    <%@ include file="/WEB-INF/views/fragments/sidebar.jspf" %>
+
+    <div class="flex min-w-0 flex-1 flex-col">
+      <%@ include file="/WEB-INF/views/fragments/topbar.jspf" %>
+
+      <main id="main" class="flex-1 p-4 sm:p-6 lg:p-8">
+        <div class="mx-auto max-w-6xl">
+          <%@ include file="/WEB-INF/views/fragments/flash.jspf" %>

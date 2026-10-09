@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0F766E">
+<title><%= pageTitle %> &middot; Clinic Manager</title>
+
+<%-- Tailwind Play CDN. Presentation only; no build step, no backend impact. --%>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {50:'#F0FDFA',100:'#CCFBF1',200:'#99F6E4',500:'#14B8A6',600:'#0F766E',700:'#115E59',800:'#134E4A'},
+        ink:     {50:'#F8FAFC',100:'#F1F5F9',200:'#E2E8F0',300:'#CBD5E1',500:'#64748B',700:'#334155',900:'#0F172A'},
+        danger:  {50:'#FEF2F2',100:'#FEE2E2',600:'#DC2626',700:'#B91C1C'},
+        success: {50:'#F0FDF4',100:'#DCFCE7',600:'#16A34A',700:'#15803D'},
+        warning: {50:'#FFFBEB',100:'#FEF3C7',600:'#D97706',700:'#B45309'},
+        info:    {50:'#EFF6FF',100:'#DBEAFE',600:'#2563EB',700:'#1D4ED8'}
+      },
+      fontFamily: {
+        sans: ['system-ui','-apple-system','Segoe UI','Roboto','Helvetica Neue','Arial','sans-serif']
+      },
+      boxShadow: {
+        card: '0 1px 2px rgba(15,23,42,.06), 0 10px 30px rgba(15,23,42,.08)'
+      }
+    }
+  },
+  safelist: ['shadow-card','animate-toast-in','alert','alert-success','alert-danger','alert-info','alert-warning','-translate-x-full']
+};
+</script>
+
+<style type="text/tailwindcss">
+  @layer base {
+    :root { color-scheme: light; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { @apply font-sans text-ink-900; }
+    :focus-visible { @apply outline-none ring-2 ring-info-600 ring-offset-2 ring-offset-white; }
+  }
+
+  @layer components {
+    .btn            { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors duration-150 disabled:opacity-60 disabled:cursor-not-allowed; }
+    .btn-primary    { @apply bg-primary-600 text-white hover:bg-primary-700; }
+    .btn-secondary  { @apply bg-white text-ink-700 border border-ink-200 hover:bg-ink-50; }
+    .btn-ghost      { @apply text-ink-700 hover:bg-ink-100; }
+    .btn-danger     { @apply bg-danger-600 text-white hover:bg-danger-700; }
+    .btn-sm         { @apply px-3 py-1.5 text-xs; }
+    .btn-block      { @apply w-full; }
+
+    .label          { @apply block text-sm font-medium text-ink-700 mb-1.5; }
+    .input          { @apply block w-full rounded-lg border border-ink-200 bg-white px-3.5 py-2.5 text-sm text-ink-900 shadow-sm placeholder:text-ink-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30; }
+    .help           { @apply mt-1.5 text-xs text-ink-500; }
+    .field-error    { @apply mt-1.5 text-xs font-medium text-danger-600; }
+
+    .card           { @apply rounded-2xl border border-ink-200 bg-white shadow-card; }
+    .card-header    { @apply flex flex-wrap items-center justify-between gap-4 border-b border-ink-200 px-5 py-4; }
+    .card-body      { @apply p-5; }
+
+    .badge          { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold; }
+    .badge-planned  { @apply bg-info-100 text-info-700; }
+    .badge-done     { @apply bg-success-100 text-success-700; }
+    .badge-canceled { @apply bg-ink-100 text-ink-500; }
+    .badge-available{ @apply bg-success-100 text-success-700; }
+    .badge-absent   { @apply bg-warning-100 text-warning-700; }
+    .badge-role     { @apply bg-primary-100 text-primary-700; }
+
+    .alert          { @apply flex items-start gap-3 rounded-xl border px-4 py-3 text-sm; }
+    .alert-danger   { @apply border-danger-100 bg-danger-50 text-danger-700; }
+    .alert-success  { @apply border-success-100 bg-success-50 text-success-700; }
+    .alert-warning  { @apply border-warning-100 bg-warning-50 text-warning-700; }
+    .alert-info     { @apply border-info-100 bg-info-50 text-info-700; }
+
+    .nav-link         { @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-ink-700 transition-colors hover:bg-ink-100; }
+    .nav-link-active  { @apply bg-primary-50 text-primary-700; }
+    .nav-section      { @apply px-3 pt-4 pb-1 text-xs font-semibold uppercase tracking-wider text-ink-500; }
+
+    .table          { @apply w-full text-sm; }
+    .table thead th { @apply bg-ink-50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-ink-500; }
+    .table tbody td { @apply border-t border-ink-200 px-4 py-3 align-middle; }
+    .table tbody tr { @apply transition-colors hover:bg-ink-50/60; }
+
+    .empty          { @apply flex flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-ink-200 bg-white px-6 py-14 text-center; }
+    .skip-link      { @apply absolute left-3 -top-14 z-50 rounded-lg bg-primary-700 px-4 py-2 text-sm font-semibold text-white transition-all focus:top-3; }
+    .kpi            { @apply rounded-2xl border border-ink-200 bg-white p-5 shadow-card; }
+  }
+
+  @layer utilities {
+    .animate-toast-in { animation: toast-in .18s ease-out; }
+    @keyframes toast-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
+</style>
+</head>

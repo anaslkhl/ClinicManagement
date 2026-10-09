@@ -1,0 +1,16 @@
+<%
+    String flashError = (String) request.getAttribute("error");
+    String flashSuccess = (String) request.getAttribute("success");
+%>
+<% if (flashError != null && !flashError.trim().isEmpty()) { %>
+  <div class="alert alert-danger mb-5" role="alert">
+    <svg class="mt-0.5 h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+    <span><%= flashError %></span>
+  </div>
+<% } %>
+<% if (flashSuccess != null && !flashSuccess.trim().isEmpty()) { %>
+  <div class="alert alert-success mb-5" role="status">
+    <svg class="mt-0.5 h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+    <span><%= flashSuccess %></span>
+  </div>
+<% } %>

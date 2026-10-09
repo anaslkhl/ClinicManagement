@@ -75,7 +75,8 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
                     )
                     .setParameter("name", name)
                     .getResultStream()
-                    .findFirst();
+                    .findFirst().orElseThrow(() -> new IllegalArgumentException(
+                            "Department not found: " + name));
 
             return Optional.ofNullable(department);
 
